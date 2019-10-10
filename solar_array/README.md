@@ -3,7 +3,7 @@
 
 This project contains the following:
 
-- **Data wrangling**
+- [**Data wrangling**](https://github.com/sergatron/projects/blob/master/solar_array/Capstone_Data_Wrangling.ipynb)
 - **NREL API script**
 - **Exploratory Data Analysis**
 - **Statsitical Analysis**
