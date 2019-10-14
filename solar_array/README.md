@@ -1,5 +1,6 @@
 # PROJECT CONTENTS
 
+Summary of results are published on [Medium](https://medium.com/@smouzykin/solar-panel-array-what-does-it-cost-46aaa083502)
 
 This project contains the following:
 
