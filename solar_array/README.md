@@ -18,6 +18,12 @@ Summary of results are published on [Medium](https://medium.com/@smouzykin/solar
 - *openpv_all.csv*: original data obtained from [here](https://openpv.nrel.gov/)
 - *pv_df_clean.csv*: written from Data_Wrangling.ipynb, intended for use in Exploratoty Data Analysis (EDA)
 - *pv_df_clean_2.csv*: written from EDA.ipynb, intended for use in Statistical Analysis, and Machine Learning
+- *Data_Wrangling.ipynb*: data wrangling/cleaning for the original data, writes new file **pv_df_clean.csv**
+- *NREL_API.ipynb*: obtains additional data in order to fill missing values in variable *annual_insolation*. Writes new file **insolation_df** which is then used in Data Wrangling.
+- *incentives_API.ipynb*
+- *EDA.ipynb*
+- *statistical_analysis.ipynb*
+- *solar_array_final_models.ipynb*
 
 ## Acknowledgements
 Original data obtained from [NREL](https://openpv.nrel.gov/)
