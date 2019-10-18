@@ -12,7 +12,7 @@ Summary of results are published on [Medium blog](https://medium.com/@smouzykin/
 - [**Machine Learning (Predicting the cost of a solar array)**](https://github.com/sergatron/projects/blob/master/solar_array/solar_array_final_models.ipynb)
 
 ## File Descriptions 
-- **openpv_all.csv**: original data obtained from [here](https://openpv.nrel.gov/)
+- **openpv_all.csv**: original data
 - **pv_df_clean.csv**: written from Data_Wrangling.ipynb, intended for use in Exploratoty Data Analysis (EDA)
 - **pv_df_clean_2.csv**: written from EDA.ipynb, intended for use in Statistical Analysis, and Machine Learning
 - **Data_Wrangling.ipynb**: data wrangling/cleaning for the original data, writes new file **pv_df_clean.csv**
