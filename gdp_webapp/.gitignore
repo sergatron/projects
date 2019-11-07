@@ -1,0 +1,9 @@
+# ignore compiled python
+*.pyc
+
+# python notebooks
+*.ipynb
+
+*.ini
+
+*.spyproject
