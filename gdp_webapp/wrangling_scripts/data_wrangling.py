@@ -129,6 +129,31 @@ countries_df.sort_values('percent', ascending=False)[:20]
 countries_df.sort_values('gdp', ascending=False)[:20]
 
 
+# filter countries above mean
+df_2 = df[df['amount'] > df['amount'].mean()]
+df_2['country'].unique()
+top_countries = df_2['country'].unique().tolist()
+
+clean_df = countries_df[countries_df['country'].isin(top_countries)]
+clean_df.reset_index(drop=True, inplace=True)
+
+clean_df['country'].nunique()
+
+# groupby Year and Country
+group_data = clean_df.groupby(['year', 'country']).agg(['mean'])
+group_data.loc[(1980, 'australia'):(2000, 'australia'), :]['percent']
+
+# groupby Country and compute mean
+agg_gdp = clean_df.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
+
+agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10]
+agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10]
+agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10]
+
+# take top 10 countries from each group and make plot for each
+
+
+
 #
 # =============================================================================
 # PLOT WORLD MILITARY EXPENDITURE
@@ -156,24 +181,5 @@ df_2['amount'].plot(kind='hist', bins=50)
 
 
 
-df_2 = df[df['amount'] > df['amount'].mean()]
-df_2['country'].unique()
-top_countries = df_2['country'].unique().tolist()
 
-clean_df = countries_df[countries_df['country'].isin(top_countries)]
-clean_df.reset_index(drop=True, inplace=True)
-
-clean_df['country'].nunique()
-
-group_data = clean_df.groupby(['year', 'country']).agg(['mean'])
-group_data.loc[(1980, 'australia'):(2000, 'australia'), :]['percent']
-
-# MEAN GDP
-agg_gdp = clean_df.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
-
-agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10]
-agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10]
-agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10]
-
-# take top 10 countries from each group and make plot for each
 
