@@ -139,44 +139,35 @@ clean_df.reset_index(drop=True, inplace=True)
 
 clean_df['country'].nunique()
 
-# groupby Year and Country
-group_data = clean_df.groupby(['year', 'country']).agg(['mean'])
-group_data.loc[(1980, 'australia'):(2000, 'australia'), :]['percent']
 
+
+
+# groupby Year and Country
+group_data = clean_df.groupby(['year', 'country']).agg('mean')
+group_data.loc[(1995, 'france'):(2000, 'france'), 'gdp']
+
+
+
+
+# FILTER COUNTRIES BY TOP 10
 # groupby Country and compute mean
 agg_gdp = clean_df.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
 
-agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10]
-agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10]
-agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10]
-
-# take top 10 countries from each group and make plot for each
+# TOP 10: Military Expenditure to GDP Ratio
+mil_10 = agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10].index.tolist()
+top_military_df = clean_df[clean_df['country'].isin(mil_10)]
 
 
-
-#
-# =============================================================================
-# PLOT WORLD MILITARY EXPENDITURE
-df[df['country'] == 'world'].plot(kind='scatter', x='year', y='amount')
-df[df['country'] == 'south africa'].plot(kind='scatter', x='year', y='amount')
+# TOP 10: Highest GDP
+gdp_10 = agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10].index.tolist()
+top_gdp_df = clean_df[clean_df['country'].isin(gdp_10)]
 
 
-df['amount'].describe()
-df['amount'].plot(kind='hist', bins=50)
-
-df_2 = df[df['amount'] > df['amount'].mean()]
-
-df_2['country'].unique()
-df_2['country'].nunique()
-
-df_2[df_2['country'] == 'germany'].plot(kind='scatter', x='year', y='amount')
-df_2[df_2['country'] == 'united states'].plot(kind='scatter', x='year', y='amount')
-
-df_2['amount'].plot(kind='hist', bins=50)
-#df_2[['country', 'year', 'amount']].plot(kind='scatter', x='year', y='amount')
+# TOP 10: Highest Military Expenditure
+percent_10 = agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10].index.tolist()
+top_ratio_df = clean_df[clean_df['country'].isin(percent_10)]
 
 
-# =============================================================================
 
 
 
