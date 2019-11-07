@@ -115,6 +115,27 @@ def clean_data():
 
     return clean_df
 
+def filter_data(clean_data):
+    # FILTER COUNTRIES BY TOP 10
+    # groupby Country and compute mean
+    agg_gdp = clean_data.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
+
+    # TOP 10: Military Expenditure to GDP Ratio
+    mil_10 = agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10].index.tolist()
+    top_military_df = clean_data[clean_data['country'].isin(mil_10)]
+
+
+    # TOP 10: Highest GDP
+    gdp_10 = agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10].index.tolist()
+    top_gdp_df = clean_data[clean_data['country'].isin(gdp_10)]
+
+
+    # TOP 10: Highest Military Expenditure
+    percent_10 = agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10].index.tolist()
+    top_ratio_df = clean_data[clean_data['country'].isin(percent_10)]
+
+    return top_military_df, top_gdp_df, top_ratio_df
+
 def return_figures():
 
     df = clean_data()
@@ -157,15 +178,16 @@ def return_figures():
     # PLOTLY EXPRESS
     import plotly.express as px
 #    gapminder = px.data.gapminder()
-    data = clean_data()
-    fig = px.line(data,
-                  x="year",
-                  y="percent",
-                  color="country",
-#                  line_group="country_code"
-                  )
+    data = filter_data(clean_data())[2]
+    fig_one = px.line(data,
+                      x="year",
+                      y="percent",
+                      title='GDP between 1960 and 2019',
+                      color="country",
+                      line_group="country_code"
+                      )
     fig_ls = []
-    fig_ls.append(fig.to_dict())
+    fig_ls.append(fig_one.to_dict())
 
     return fig_ls
 
