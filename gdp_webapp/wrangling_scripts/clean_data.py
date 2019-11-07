@@ -8,6 +8,7 @@ Created on Tue Nov  5 19:05:42 2019
 
 """
 
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -103,7 +104,7 @@ def clean_data():
 
     # MILITARY VS GDP
     # compute percent of GDP
-    countries_df['percent'] = countries_df['military_expend'] / countries_df['gdp']
+    countries_df['percent'] = countries_df['military_expend'] / countries_df['gdp'] * 100
 
     # extract countries with higher GDP
     df_2 = df[df['amount'] > df['amount'].mean()]
@@ -128,12 +129,14 @@ def return_figures():
         # x=years, y=GDP
         x_val = df[df['country'] == country].year.tolist()
         y_val =  df[df['country'] == country].gdp.tolist()
+        mark_size = df[df['country'] == country].percent*10
 
         graph_one.append(
                 go.Scatter(
                         x=x_val,
                         y=y_val,
-                        mode='lines',
+                        mode='markers',
+                        marker=dict(size=mark_size),
                         name=country
                         )
                 )
@@ -151,6 +154,18 @@ def return_figures():
 
             ]
 
-    return figures
+    # PLOTLY EXPRESS
+    import plotly.express as px
+#    gapminder = px.data.gapminder()
+    data = clean_data()
+    fig = px.line(data,
+                  x="year",
+                  y="percent",
+                  color="country",
+#                  line_group="country_code"
+                  )
+    fig_ls = []
+    fig_ls.append(fig.to_dict())
 
+    return fig_ls
 

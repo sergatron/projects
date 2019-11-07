@@ -122,7 +122,7 @@ countries_df = countries_df.rename(columns={'amount': 'military_expend'})
 
 # MILITARY VS GDP
 # compute percent of GDP
-countries_df['percent'] = countries_df['military_expend'] / countries_df['gdp']
+countries_df['percent'] = countries_df['military_expend'] / countries_df['gdp'] * 100
 
 countries_df.sort_values('percent', ascending=False)[:20]
 
@@ -166,12 +166,14 @@ clean_df.reset_index(drop=True, inplace=True)
 clean_df['country'].nunique()
 
 group_data = clean_df.groupby(['year', 'country']).agg(['mean'])
-
+group_data.loc[(1980, 'australia'):(2000, 'australia'), :]['percent']
 
 # MEAN GDP
 agg_gdp = clean_df.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
 
-agg_gdp.sort_values(('gdp', 'mean'), ascending=False)
+agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10]
+agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10]
+agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10]
 
-
+# take top 10 countries from each group and make plot for each
 
