@@ -1,5 +1,5 @@
 # Gross Domestic Product (GDP) and Military Expenditures Web Application
-Using Plotly express, this simple app visualizes the changes in GDP and military expenditure between the years of 1960 and 2019.
+Using Plotly express, this simple web app visualizes the changes in GDP and military expenditure between the years of 1960 and 2019.
 
 # Data Sources
 - [Military Expenditure](https://data.worldbank.org/indicator/MS.MIL.XPND.CD)
