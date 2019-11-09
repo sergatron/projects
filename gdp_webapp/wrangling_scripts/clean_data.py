@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objs as go
+import plotly.express as px
 
 pd.options.display.max_columns = 30
 pd.options.display.max_rows = 50
@@ -175,19 +176,72 @@ def return_figures():
 
             ]
 
+
+
     # PLOTLY EXPRESS
-    import plotly.express as px
-#    gapminder = px.data.gapminder()
-    data = filter_data(clean_data())[2]
+    # Plot 1: Military Expense
+    data = filter_data(clean_data())[0]
     fig_one = px.line(data,
                       x="year",
-                      y="percent",
+                      y="military_expend",
+                      title='Military Expenditure 1960 - 2019',
+                      color="country",
+                      line_group="country_code",
+                      labels={'military_expend': 'Military Expenditure',
+                              'year': 'Year'
+                              }
+                      )
+    # Plot 2: GDP of nations
+    data_1 = filter_data(clean_data())[1]
+    fig_two = px.line(data_1,
+                      x="year",
+                      y="gdp",
                       title='GDP between 1960 and 2019',
                       color="country",
-                      line_group="country_code"
+                      line_group="country_code",
+                      labels={'gdp': 'Gross Domestic Product (GDP)',
+                              'year': 'Year'
+                              }
                       )
+
+    # Plot 3: ratio of Military Expense to GDP
+    data_2 = filter_data(clean_data())[2]
+    fig_three = px.line(data_2,
+                        x="year",
+                        y="percent",
+                        title='Military Expenditure to GDP ratio 1960 - 2019',
+                        color="country",
+                        line_group="country_code",
+                        labels={'percent': 'Military Expenditure to GDP Ratio',
+                              'year': 'Year'
+                              }
+                        )
+    # Plot 4: Scatter ratio of Military Expense to GDP
+    data_2_scat = filter_data(clean_data())[2]
+    # create new column for size of marker
+#    data_2_scat['marker_size'] = data_2_scat['percent']
+    fig_four = px.scatter(data_2_scat,
+                          x="year",
+                          y="gdp",
+                          log_y=True,
+                          title='Military Expenditure to GDP ratio 1960 - 2019',
+                          color="country",
+                          hover_data=['country', 'percent', 'gdp'],
+                          size='percent',
+                          size_max=75,
+                          opacity=0.3,
+                          labels={'percent': 'Military Expenditure to GDP Ratio',
+                                  'year': 'Year'
+                                  }
+                          )
+
+
+    # append all data into list
     fig_ls = []
-    fig_ls.append(fig_one.to_dict())
+    for item in [fig_one.to_dict(), fig_two.to_dict(),
+                 fig_three.to_dict(), fig_four.to_dict()]:
+        fig_ls.append(item)
+
 
     return fig_ls
 
