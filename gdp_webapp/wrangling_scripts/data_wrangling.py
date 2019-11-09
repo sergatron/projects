@@ -153,7 +153,8 @@ group_data.loc[(1995, 'france'):(2000, 'france'), 'gdp']
 # groupby Country and compute mean
 agg_gdp = clean_df.groupby(['country'])['military_expend','gdp','percent'].agg(['mean'])
 
-# TOP 10: Military Expenditure to GDP Ratio
+
+# TOP 10: Highest Military Expenditure
 mil_10 = agg_gdp.sort_values(('military_expend', 'mean'), ascending=False)[:10].index.tolist()
 top_military_df = clean_df[clean_df['country'].isin(mil_10)]
 
@@ -163,10 +164,10 @@ gdp_10 = agg_gdp.sort_values(('gdp', 'mean'), ascending=False)[:10].index.tolist
 top_gdp_df = clean_df[clean_df['country'].isin(gdp_10)]
 
 
-# TOP 10: Highest Military Expenditure
+# TOP 10: Military Expenditure to GDP Ratio
 percent_10 = agg_gdp.sort_values(('percent', 'mean'), ascending=False)[:10].index.tolist()
 top_ratio_df = clean_df[clean_df['country'].isin(percent_10)]
-
+top_ratio_df.sort_values('percent', ascending=False)
 
 
 
