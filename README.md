@@ -1,1 +1,2 @@
-# Data Science and Machine Learning Projects
+# Python Projects
+Programming, Data Science, and Machine Learning personal projects
