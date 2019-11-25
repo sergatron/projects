@@ -5,3 +5,6 @@ Data can be obtained using Pandas' **pandas_datareader** module or scraped from 
  - **stock_analysis.py**: imports data from a CSV file, calculates some simple metrics for the SPY ETF (tracks SP500 index) ticker such as RSI, Stochastics, and Moving Averages (20 day, 50 day).
  
  - **stock_scraper.py**: extracts specific data from given `url`, creates a data frame, accomplishes cleaning/preparation, and then writes to a CSV file.
+ 
+ # Acknowledgements
+ Technical analysis was performed using the [**ta**](https://github.com/bukosabino/ta) module
