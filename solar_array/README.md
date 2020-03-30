@@ -2,6 +2,10 @@
 
 Summary of results are published on [Medium blog](https://medium.com/@smouzykin/solar-panel-array-what-does-it-cost-46aaa083502)
 
+
+Portfolio [Link](https://github.com/sergatron/Portfolio)
+
+
 ## Tabel of Contents:
 
 - [**Data wrangling**](https://github.com/sergatron/projects/blob/master/solar_array/Data_Wrangling.ipynb)
